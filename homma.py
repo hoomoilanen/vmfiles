@@ -8,20 +8,32 @@ ip = requests.get("http://metadata.google.internal/computeMetadata/v1/instance/a
 def connect():
     con = psycopg2.connect(host=(ip.text),database="group3db",port=5432,user=(sqluser.text),password=(pw.text))
     cursor = con.cursor()
-    select_all(cursor)
+    hoursum(cursor)
+    dailydata(cursor)
     con.commit()
     cursor.close()
 
-def select_all(cursor):
+def hoursum(cursor):
 
     SQL = "SELECT SUM(AGE(ended,started)) AS hoursum FROM testilog WHERE date(started) = CURRENT_DATE;"
     cursor.execute(SQL)
     row = cursor.fetchone()
-    with open('dailyhour.txt', 'w') as file:
-        while row is not None:
-            file.write(row)
-    colnames = [desc[0] for desc in cursor.description]
-    print(colnames)
+    while row is not None:
+        with open('dailyhour.txt', 'w') as file:
+            file.write(str(row))
+            file.write("\n")
+        row = cursor.fetchone()
+
+def dailydata(cursor):
+
+    SQL = "SELECT * FROM testilog WHERE date(started) = CURRENT_DATE;"
+    cursor.execute(SQL)
+    row = cursor.fetchone()
+    while row is not None:
+        with open('dailyactivities', 'w') as file:
+            file.write(str(row))
+            file.write("\n")
+        row = cursor.fetchone()
 
 if __name__ == '__main__':
 
