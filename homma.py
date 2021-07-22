@@ -30,7 +30,7 @@ def dailydata(cursor):
     cursor.execute(SQL)
     row = cursor.fetchone()
     while row is not None:
-        with open('dailyactivities', 'w') as file:
+        with open('dailyactivities.txt', 'w') as file:
             file.write(str(row))
             file.write("\n")
         row = cursor.fetchone()
