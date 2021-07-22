@@ -14,8 +14,12 @@ def connect():
 
 def select_all(cursor):
 
-    SQL = 'SELECT * FROM testilog;'
+    SQL = "SELECT SUM(AGE(ended,started)) AS hoursum FROM testilog WHERE date(started) = CURRENT_DATE;"
     cursor.execute(SQL)
+    row = cursor.fetchnone()
+    with open('dailyhour.txt', 'w') as file:
+        while row is not None:
+            file.write(row)
     colnames = [desc[0] for desc in cursor.description]
     print(colnames)
 
