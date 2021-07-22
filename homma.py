@@ -19,7 +19,7 @@ def hoursum(cursor):
     cursor.execute(SQL)
     row = cursor.fetchone()
     while row is not None:
-        with open('dailyhour.txt', 'a') as file:
+        with open('dailyhour.txt', 'w') as file:
             file.write(str(row))
             file.write("\n")
         row = cursor.fetchone()
@@ -30,7 +30,7 @@ def daily_data(cursor):
     cursor.execute(SQL)
     row = cursor.fetchone()
     while row is not None:
-        with open('daily.txt', 'a') as file:
+        with open('daily.txt', 'w') as file:
             file.write(str(row))
             file.write("\n")
         row = cursor.fetchone()
