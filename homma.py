@@ -6,7 +6,7 @@ sqluser = requests.get("http://metadata.google.internal/computeMetadata/v1/insta
 ip = requests.get("http://metadata.google.internal/computeMetadata/v1/instance/attributes/kok",headers={'Metadata-Flavor': 'Google'})
 
 def connect():
-    con = psycopg2.connect(host=(ip.content),database="group3db",port=5432,user=sqluser,password=pw)
+    con = psycopg2.connect(host=(ip.text),database="group3db",port=5432,user=sqluser,password=pw)
     cursor = con.cursor()
     select_all(cursor)
     con.commit()
