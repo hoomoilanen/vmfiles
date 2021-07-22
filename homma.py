@@ -8,8 +8,8 @@ ip = requests.get("http://metadata.google.internal/computeMetadata/v1/instance/a
 def connect():
     con = psycopg2.connect(host=(ip.text),database="group3db",port=5432,user=(sqluser.text),password=(pw.text))
     cursor = con.cursor()
-    hoursum(cursor)
     dailydata(cursor)
+    hoursum(cursor)
     con.commit()
     cursor.close()
 
