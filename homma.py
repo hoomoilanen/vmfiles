@@ -15,7 +15,7 @@ def connect():
 
 def hoursum(cursor):
 
-    SQL = "SELECT SUM(AGE(ended,started)) AS hoursum FROM testilog WHERE date(started) = CURRENT_DATE;"
+    SQL = "SELECT SUM(AGE(ended,started)) AS hoursum FROM testilogs WHERE date(started) = CURRENT_DATE;"
     cursor.execute(SQL)
     row = cursor.fetchone()
     while row is not None:
@@ -26,7 +26,7 @@ def hoursum(cursor):
 
 def daily_data(cursor):
 
-    SQL = "SELECT * FROM testilog WHERE date(started) = CURRENT_DATE;"
+    SQL = "SELECT * FROM testilogs WHERE date(started) = CURRENT_DATE;"
     cursor.execute(SQL)
     row = cursor.fetchone()
     while row is not None:
