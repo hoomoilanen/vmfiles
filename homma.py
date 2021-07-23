@@ -28,7 +28,6 @@ def daily_data(cursor):
 
     SQL = "SELECT * FROM testilog WHERE date(started) = CURRENT_DATE;"
     cursor.execute(SQL)
-    file = open('daily.txt', 'w')
     results = cursor.fetchall()
     with open('dailyactivities.txt', 'w') as file:
         for row in results:
