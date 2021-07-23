@@ -30,13 +30,10 @@ def daily_data(cursor):
     cursor.execute(SQL)
     file = open('daily.txt', 'w')
     results = cursor.fetchall()
-    file.write('\n'.join(map(lambda x: str(x[0]) + ': ' + str(x[1])+ ': ' + str(x[2])  + ': ' + str(x[3])  + ': ' + str(x[4]), results)))
-    #row = cursor.fetchone()
-    #while row is not None:
-        #with open('daily.txt', 'w') as file:
-            #file.write(str(row))
-            #file.write("\n")
-        #row = cursor.fetchone()
+    with open('dailyactivities.txt', 'w') as file:
+        for row in results:
+            file.write(str(row))
+            file.write("\n")
 
 if __name__ == '__main__':
 
